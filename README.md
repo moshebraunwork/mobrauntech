@@ -55,7 +55,8 @@ A way for potential clients to reach out directly.
 
 **Sections:**
 - Contact form (Name, Email, Company, Message, optional: Project type / Budget range)
-- Business email and/or social links
+- Business email: **support@mobrauntech.com**
+- Social links (TBD)
 - Optional: Short FAQ or "What happens next" step list to set expectations
 
 ---
