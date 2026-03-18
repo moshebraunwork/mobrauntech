@@ -99,6 +99,56 @@ Small business owners who:
 
 ---
 
+## Social Branding & Identity
+
+### Favicon (Browser Tab Icon)
+Every page must include a proper favicon so the Mobrauntech logo appears in the browser tab, bookmarks bar, and history — just like any professional website.
+
+**Requirements:**
+- `favicon.ico` placed in `/public` for legacy browser support
+- `icon.png` (32×32 and 192×192) for modern browsers and PWA
+- `apple-touch-icon.png` (180×180) for iOS home screen shortcuts
+- All configured in the Next.js `<head>` / `metadata` export so they apply site-wide
+
+---
+
+### Social Sharing Preview (Open Graph / Twitter Card)
+When anyone shares a link to mobrauntech.com on WhatsApp, iMessage, Slack, LinkedIn, Twitter/X, Facebook, or any other social platform, the preview should show a branded image (not a blank card).
+
+**Requirements:**
+- A dedicated OG image (`/public/og-image.png`) — recommended size **1200×630 px** — featuring the Mobrauntech logo, tagline, and a clean branded background
+- The following `<meta>` tags set on every page (global in `layout.tsx` metadata, with page-level overrides where relevant):
+  - `og:title` — page title
+  - `og:description` — short description of the page / site
+  - `og:image` — absolute URL to the OG image (e.g. `https://mobrauntech.com/og-image.png`)
+  - `og:url` — canonical URL of the current page
+  - `og:type` — `website`
+  - `twitter:card` — `summary_large_image`
+  - `twitter:image` — same OG image URL
+- Next.js `metadata` API (or `generateMetadata`) should be used so tags are server-rendered and crawlable
+
+---
+
+### Embeddable "Built by Mobrauntech" Footer Badge
+Clients whose websites were built by Mobrauntech should be able to add a small, unobtrusive badge to the footer of their own sites. This badge:
+- Displays the Mobrauntech logo + "Built by Mobrauntech" (or similar short text)
+- Links back to `https://mobrauntech.com`
+- Helps with brand recognition and inbound referral traffic
+
+**Implementation plan:**
+- A dedicated public page or route, e.g. `/badge`, that renders *only* the badge component (no nav, no footer) — suitable for embedding via `<iframe>` if needed
+- A copyable HTML snippet hosted at `/embed` or documented on the site, e.g.:
+  ```html
+  <a href="https://mobrauntech.com" target="_blank" rel="noopener">
+    <img src="https://mobrauntech.com/badge.png" alt="Built by Mobrauntech" height="32" />
+  </a>
+  ```
+- A static `badge.png` image (`/public/badge.png`) — a clean horizontal lockup of the logo + name on a transparent or dark background, sized for use at small heights (32–40 px tall)
+- Optionally: a lightweight JS snippet (`/embed.js`) that injects a styled `<a>` tag, so clients don't depend on the image CDN being up
+- The badge should be visually consistent with the site's branding (same colors, same logo)
+
+---
+
 ## Out of Scope (for now)
 
 - Blog / articles page
