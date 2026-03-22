@@ -50,11 +50,35 @@ A dedicated page for clients to pay for their project or invoice.
 
 ---
 
-### 4. Contact
+### 4. Pricing Packages
+A section (on the Home page and/or a dedicated Pricing page) that clearly presents the 3 available service packages so visitors can understand their options before reaching out.
+
+**The 3 packages:**
+
+| Package | What's Included | Price |
+|---------|----------------|-------|
+| **Starter** | Single-page website — clean, modern design, mobile-responsive, contact form, basic SEO setup | **$499** |
+| **Business** | Multi-page website (up to 5 pages) — everything in Starter plus custom branding, blog or portfolio section, social media integration, and priority support | **$999** |
+| **Custom** | Fully custom web application or software — tailored features, custom database, admin dashboard, third-party API integrations, ongoing support agreement | **Starting at $2,500** (quote-based) |
+
+**Important — No payment required upfront:**
+- Customers do **not** pay before the product is delivered
+- Payment is only collected once the client reviews and approves the finished work
+- This policy must be clearly stated on the pricing section (e.g. "You only pay when you're happy with the result")
+
+**Package selection + Contact form integration:**
+- Each package card has a "Get Started" or "Choose Plan" button
+- Clicking it scrolls to / opens the Contact form with the selected plan pre-filled in a hidden (or visible read-only) field
+- The submitted form data includes the chosen package so Moshe knows which plan the lead is interested in
+- Contact form fields: Name, Email, Company (optional), Message, **Selected Plan** (auto-filled from package choice, editable)
+
+---
+
+### 5. Contact
 A way for potential clients to reach out directly.
 
 **Sections:**
-- Contact form (Name, Email, Company, Message, optional: Project type / Budget range)
+- Contact form (Name, Email, Company, Message, Selected Plan — pre-filled from pricing section)
 - Business email and/or social links
 - Optional: Short FAQ or "What happens next" step list to set expectations
 
