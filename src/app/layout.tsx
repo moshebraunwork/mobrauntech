@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
@@ -17,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Mobrauntech",
   },
   description:
-    "Mobrauntech builds professional websites and custom software for small businesses. Modern, fast, and built to grow. Starting at $499.",
+    "Mobrauntech builds professional websites and custom software for small businesses. Modern, fast, and built to grow. Starting at $499 — you only pay when you're happy.",
   openGraph: {
     type: "website",
     siteName: "Mobrauntech",
@@ -47,12 +50,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text)]">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+    <html
+      lang="en"
+      className={`${inter.variable} ${spaceGrotesk.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-screen bg-background text-foreground">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          {children}
         </ThemeProvider>
       </body>
     </html>

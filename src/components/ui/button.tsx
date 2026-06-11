@@ -4,21 +4,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-xl font-semibold text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--text)] disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold text-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "bg-[var(--btn-bg)] text-[var(--btn-text)] hover:bg-[var(--btn-hover)]",
+          "bg-gradient-to-r from-accent to-accent-2 text-white shadow-[0_4px_20px_var(--glow)] hover:scale-[1.03] hover:shadow-[0_6px_28px_var(--glow)] active:scale-[0.98]",
         outline:
-          "border border-[var(--border)] bg-transparent text-[var(--text)] hover:bg-[var(--bg-secondary)]",
-        ghost:
-          "bg-transparent text-[var(--text)] hover:bg-[var(--bg-secondary)]",
-        link: "bg-transparent text-[var(--text)] underline-offset-4 hover:underline p-0 h-auto",
+          "border border-border bg-surface/50 text-foreground hover:border-accent/40 hover:bg-surface-2 active:scale-[0.98]",
+        ghost: "bg-transparent text-foreground hover:bg-surface-2",
+        link: "bg-transparent text-foreground underline-offset-4 hover:underline p-0 h-auto",
       },
       size: {
         default: "px-5 py-2.5",
-        sm: "px-3 py-1.5 text-xs",
+        sm: "px-3.5 py-1.5 text-xs",
         lg: "px-7 py-3.5 text-base",
         icon: "w-9 h-9",
       },
