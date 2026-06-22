@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { SpotlightCard } from "@/components/spotlight-card";
-import { BuildAlong } from "@/components/build-along";
+import { BuildExperience } from "@/components/build-along";
 import {
   ArrowRight,
   CheckCircle2,
@@ -151,7 +151,7 @@ const marqueeItems = [
 
 export default function Home() {
   return (
-    <>
+    <BuildExperience>
       {/* Hero */}
       <section className="relative overflow-hidden">
         {/* Background layers */}
@@ -363,9 +363,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Scroll-driven "watch it build itself" demo */}
-      <BuildAlong />
-
       {/* Pricing preview */}
       <section className="border-y border-border bg-surface/40">
         <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
@@ -472,6 +469,6 @@ export default function Home() {
           </div>
         </Reveal>
       </section>
-    </>
+    </BuildExperience>
   );
 }

@@ -181,15 +181,6 @@ body {
   }
 }
 
-/* Progress rail fill is driven by a CSS var so scrolling costs no re-renders */
-.build-rail-fill {
-  height: 100%;
-  width: 100%;
-  transform-origin: 0 50%;
-  transform: scaleX(var(--build-p, 0));
-  background: linear-gradient(90deg, #f59e0b, #d97706, #b45309);
-}
-
 /* A block transitions between hidden → skeleton → finished */
 .build-block {
   transition:
