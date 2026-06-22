@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowRight, Sparkles } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -44,10 +44,21 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="group flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent via-accent-2 to-accent-3 text-white shadow-[0_4px_14px_var(--glow)] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-105">
-            <Sparkles size={16} strokeWidth={2.5} />
-          </span>
+        <Link href="/" className="group flex items-center gap-2.5">
+          <span
+            aria-hidden
+            className="h-7 w-14 bg-foreground transition-transform duration-300 group-hover:scale-105"
+            style={{
+              maskImage: "url(/logo-mark.png)",
+              WebkitMaskImage: "url(/logo-mark.png)",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+            }}
+          />
           <span className="font-display text-lg font-bold tracking-tight">
             Mobrauntech
           </span>
