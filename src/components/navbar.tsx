@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
@@ -83,10 +82,9 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2.5">
-          <ThemeToggle />
           <Link
             href="/contact"
-            className="group hidden items-center gap-1.5 rounded-full bg-gradient-to-r from-accent to-accent-2 px-4 py-2 text-sm font-semibold text-white shadow-[0_4px_20px_var(--glow)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_6px_28px_var(--glow)] md:inline-flex"
+            className="group hidden items-center gap-1.5 rounded-full bg-gradient-to-r from-accent to-accent-2 px-4 py-2 text-sm font-semibold text-accent-foreground shadow-[0_4px_20px_var(--glow)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_6px_28px_var(--glow)] md:inline-flex"
           >
             Get a Free Quote
             <ArrowRight
@@ -134,7 +132,7 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-accent to-accent-2 px-4 py-2.5 text-sm font-semibold text-white"
+              className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-accent to-accent-2 px-4 py-2.5 text-sm font-semibold text-accent-foreground"
             >
               Get a Free Quote <ArrowRight size={15} />
             </Link>

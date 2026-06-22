@@ -133,7 +133,7 @@ export default function PricingPage() {
                 }
               >
                 {pkg.highlighted && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-accent to-accent-2 px-3.5 py-1 text-xs font-semibold text-white shadow-[0_4px_14px_var(--glow)]">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-accent to-accent-2 px-3.5 py-1 text-xs font-semibold text-accent-foreground shadow-[0_4px_14px_var(--glow)]">
                     Most Popular
                   </span>
                 )}
