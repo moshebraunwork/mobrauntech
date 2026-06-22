@@ -5,13 +5,15 @@ import { Coffee, Croissant, Cookie, MapPin, Clock, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /* -------------------------------------------------------------------------- */
-/* Scroll-driven demo: a café website that assembles itself as you scroll.    */
+/* Scroll experience: a café website that assembles itself on the left while  */
+/* the real page content scrolls past on the right.                           */
 /*                                                                            */
-/* The section is taller than the viewport. A sticky stage is pinned inside   */
-/* it, and the scroll distance through the section drives a 0→1 progress       */
-/* value. That value is mapped to discrete "phases" — first empty, then       */
-/* skeleton blocks drop in one by one, and finally everything dissolves into  */
-/* a finished, front-end-only café site. Nothing is saved; it's pure flair.   */
+/* The whole homepage is wrapped in a two-column layout. The left column is   */
+/* pinned (sticky) for the entire scroll; the right column holds the actual   */
+/* marketing content. How far you've scrolled the page drives a 0→1 progress   */
+/* value, which is mapped to discrete "phases" — first empty, then skeleton    */
+/* blocks drop in one by one, and finally everything dissolves into a          */
+/* finished, front-end-only café site. Nothing is saved; it's pure flair.     */
 /* -------------------------------------------------------------------------- */
 
 /** Phase at which each block first appears (as a skeleton). */
@@ -21,20 +23,10 @@ const MENU = 3;
 const HOURS = 4;
 const REVEAL = 5;
 
-const steps = [
-  "Empty canvas",
-  "Navigation bar",
-  "Hero section",
-  "Menu items",
-  "Hours & location",
-  "Launch 🎉",
-];
-
 type BlockState = "hidden" | "skeleton" | "real";
 
-export function BuildAlong() {
+export function BuildExperience({ children }: { children: ReactNode }) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const railRef = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
@@ -44,7 +36,6 @@ export function BuildAlong() {
     // Respect reduced-motion: jump straight to the finished site.
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (reduce.matches) {
-      railRef.current?.style.setProperty("--build-p", "1");
       const id = requestAnimationFrame(() => setPhase(REVEAL));
       return () => cancelAnimationFrame(id);
     }
@@ -55,16 +46,22 @@ export function BuildAlong() {
       const rect = wrap.getBoundingClientRect();
       const scrollable = rect.height - window.innerHeight;
       const p =
-        scrollable > 0
-          ? Math.min(1, Math.max(0, -rect.top / scrollable))
-          : 0;
+        scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
 
-      // Smooth rail fill via a CSS var — no React re-render per scroll tick.
-      railRef.current?.style.setProperty("--build-p", p.toFixed(3));
-
-      // Discrete phase: empty → 4 build steps → reveal.
+      // Discrete phase: empty → 4 build steps → reveal. The site is fully
+      // built a little before the page bottom so the payoff lands on screen.
       const next =
-        p >= 0.8 ? REVEAL : p >= 0.62 ? HOURS : p >= 0.44 ? MENU : p >= 0.24 ? HERO : p >= 0.06 ? NAV : 0;
+        p >= 0.72
+          ? REVEAL
+          : p >= 0.55
+          ? HOURS
+          : p >= 0.38
+          ? MENU
+          : p >= 0.2
+          ? HERO
+          : p >= 0.05
+          ? NAV
+          : 0;
       setPhase((prev) => (prev === next ? prev : next));
     };
 
@@ -87,75 +84,28 @@ export function BuildAlong() {
     revealed ? "real" : phase >= appearsAt ? "skeleton" : "hidden";
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
-      {/* Tall track that gives us room to scroll while the stage is pinned. */}
-      <div ref={wrapRef} className="relative h-[320vh]">
-        <div className="sticky top-0 flex min-h-screen items-center py-16">
-          <div className="grid w-full items-center gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-            {/* Narration / progress */}
-            <div>
-              <p className="mb-3 font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent">
-                Watch it happen
-              </p>
-              <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-                A website that builds itself as you scroll
-              </h2>
-              <p className="mt-4 max-w-md leading-relaxed text-muted">
-                Keep scrolling and watch a real café site come together piece by
-                piece — from a blank screen to a polished, launch-ready page.
-              </p>
-
-              <ol className="mt-8 space-y-2.5">
-                {steps.map((label, i) => {
-                  const active = phase === i;
-                  const done = phase > i;
-                  return (
-                    <li
-                      key={label}
-                      className={cn(
-                        "flex items-center gap-3 text-sm transition-colors duration-300",
-                        active
-                          ? "text-foreground"
-                          : done
-                          ? "text-muted"
-                          : "text-muted/45"
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-semibold transition-all duration-300",
-                          active
-                            ? "border-accent bg-accent text-accent-foreground"
-                            : done
-                            ? "border-accent/40 text-accent"
-                            : "border-border text-muted/50"
-                        )}
-                      >
-                        {done ? "✓" : i + 1}
-                      </span>
-                      {label}
-                    </li>
-                  );
-                })}
-              </ol>
-
-              {/* Smooth scroll progress rail */}
-              <div className="mt-8 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-surface-2">
-                <div ref={railRef} className="build-rail-fill" />
-              </div>
-            </div>
-
-            {/* The browser stage */}
-            <BrowserFrame revealed={revealed}>
-              <CafeNav state={stateFor(NAV)} />
-              <CafeHero state={stateFor(HERO)} />
-              <CafeMenu state={stateFor(MENU)} />
-              <CafeHours state={stateFor(HOURS)} />
-            </BrowserFrame>
+    <div ref={wrapRef} className="lg:flex">
+      {/* Pinned stage — hidden on small screens where side-by-side won't fit */}
+      <aside className="hidden lg:block lg:w-[42%] lg:shrink-0">
+        <div className="sticky top-16 flex h-[calc(100vh-4rem)] items-center px-5 xl:px-10">
+          {/* Ambient glow behind the browser */}
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <div className="animate-aurora absolute left-1/4 top-1/4 h-80 w-80 rounded-full bg-[#b45309]/[0.12] blur-[120px]" />
+            <div className="animate-float-slow absolute bottom-1/4 right-1/4 h-72 w-72 rounded-full bg-foreground/[0.05] blur-[100px]" />
           </div>
+
+          <BrowserFrame revealed={revealed}>
+            <CafeNav state={stateFor(NAV)} />
+            <CafeHero state={stateFor(HERO)} />
+            <CafeMenu state={stateFor(MENU)} />
+            <CafeHours state={stateFor(HOURS)} />
+          </BrowserFrame>
         </div>
-      </div>
-    </section>
+      </aside>
+
+      {/* The real marketing content scrolls past on the right */}
+      <div className="min-w-0 lg:w-[58%]">{children}</div>
+    </div>
   );
 }
 
@@ -171,7 +121,7 @@ function BrowserFrame({
   revealed: boolean;
 }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-[0_30px_80px_-30px_var(--glow)]">
+    <div className="relative w-full overflow-hidden rounded-2xl border border-border bg-surface shadow-[0_40px_100px_-30px_rgba(0,0,0,0.8)]">
       {/* Title bar */}
       <div className="flex items-center gap-2 border-b border-border bg-surface-2 px-4 py-3">
         <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
@@ -183,7 +133,7 @@ function BrowserFrame({
       </div>
 
       {/* Viewport — the café "site" renders here on a warm background */}
-      <div className="h-[26rem] overflow-hidden bg-[#faf6ef] sm:h-[30rem]">
+      <div className="h-[58vh] max-h-[34rem] min-h-[24rem] overflow-hidden bg-[#faf6ef]">
         <div className="flex h-full flex-col">{children}</div>
       </div>
     </div>
