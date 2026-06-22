@@ -10,6 +10,8 @@ import { CheckCircle2, Loader2, Send } from "lucide-react";
 
 const plans = ["Not sure yet", "Starter — $499", "Business — $999", "Custom — From $2,500"];
 
+const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+
 type Status = "idle" | "loading" | "success" | "error";
 
 export function ContactForm() {
@@ -38,6 +40,12 @@ export function ContactForm() {
     e.preventDefault();
     setStatus("loading");
     setErrorMsg("");
+
+    if (!WEB3FORMS_ACCESS_KEY) {
+      setStatus("error");
+      setErrorMsg("Form is not configured yet. Please contact us directly by email.");
+      return;
+    }
 
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -85,8 +93,8 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       className="flex flex-col gap-5 rounded-2xl border border-border bg-surface p-6 shadow-[0_20px_70px_-40px_var(--glow)] sm:p-8"
     >
-      {/* Web3Forms access key — replace with your key from web3forms.com */}
-      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+      {/* Web3Forms access key — set NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY (get one at web3forms.com) */}
+      <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
       <input type="hidden" name="subject" value="New inquiry from mobrauntech.com" />
       <input type="hidden" name="from_name" value="Mobrauntech Website" />
 
