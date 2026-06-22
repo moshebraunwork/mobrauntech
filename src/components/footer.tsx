@@ -78,9 +78,6 @@ export function Footer() {
           <p className="text-xs text-muted">
             © {new Date().getFullYear()} Mobrauntech. All rights reserved.
           </p>
-          <p className="text-xs text-muted">
-            Crafted with care — no templates, no shortcuts.
-          </p>
         </div>
       </div>
     </footer>
