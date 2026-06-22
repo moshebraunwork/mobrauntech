@@ -9,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-accent to-accent-2 text-white shadow-[0_4px_20px_var(--glow)] hover:scale-[1.03] hover:shadow-[0_6px_28px_var(--glow)] active:scale-[0.98]",
+          "bg-gradient-to-r from-accent to-accent-2 text-accent-foreground shadow-[0_4px_20px_var(--glow)] hover:scale-[1.03] hover:shadow-[0_6px_28px_var(--glow)] active:scale-[0.98]",
         outline:
           "border border-border bg-surface/50 text-foreground hover:border-accent/40 hover:bg-surface-2 active:scale-[0.98]",
         ghost: "bg-transparent text-foreground hover:bg-surface-2",

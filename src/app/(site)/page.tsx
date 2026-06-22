@@ -156,17 +156,17 @@ export default function Home() {
         {/* Background layers */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="bg-grid absolute inset-0" />
-          <div className="animate-aurora absolute -top-40 left-1/4 h-130 w-130 rounded-full bg-accent/25 blur-[120px]" />
-          <div className="animate-float absolute top-20 -right-20 h-105 w-105 rounded-full bg-accent-2/20 blur-[110px]" />
-          <div className="animate-float-slow absolute -bottom-32 -left-24 h-95 w-95 rounded-full bg-accent-3/15 blur-[100px]" />
+          <div className="animate-aurora absolute -top-40 left-1/4 h-130 w-130 rounded-full bg-foreground/[0.06] blur-[120px]" />
+          <div className="animate-float absolute top-20 -right-20 h-105 w-105 rounded-full bg-foreground/[0.04] blur-[110px]" />
+          <div className="animate-float-slow absolute -bottom-32 -left-24 h-95 w-95 rounded-full bg-foreground/[0.03] blur-[100px]" />
         </div>
 
         <div className="relative mx-auto max-w-6xl px-4 pt-24 pb-20 text-center sm:px-6 sm:pt-36 sm:pb-28">
           <Reveal>
             <div className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-border bg-surface/60 px-4 py-1.5 text-sm text-muted backdrop-blur">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-foreground opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-foreground" />
               </span>
               Available for new projects
             </div>
@@ -261,7 +261,7 @@ export default function Home() {
           {services.map((service, i) => (
             <Reveal key={service.title} delay={i * 90}>
               <SpotlightCard className="h-full p-6">
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-2 text-white shadow-[0_4px_16px_var(--glow)]">
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-surface-2 text-foreground">
                   <service.icon size={20} />
                 </div>
                 <h3 className="mb-2 font-display text-lg font-bold">
@@ -390,7 +390,7 @@ export default function Home() {
                   }
                 >
                   {pkg.highlighted && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-accent to-accent-2 px-3.5 py-1 text-xs font-semibold text-white shadow-[0_4px_14px_var(--glow)]">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-accent to-accent-2 px-3.5 py-1 text-xs font-semibold text-accent-foreground shadow-[0_4px_14px_var(--glow)]">
                       Most Popular
                     </span>
                   )}
@@ -439,7 +439,7 @@ export default function Home() {
           <div className="relative overflow-hidden rounded-3xl border border-border bg-surface px-6 py-20 text-center sm:px-12">
             <div aria-hidden className="pointer-events-none absolute inset-0">
               <div className="bg-grid absolute inset-0" />
-              <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/25 blur-[100px]" />
+              <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-foreground/[0.07] blur-[100px]" />
             </div>
             <div className="relative">
               <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">
