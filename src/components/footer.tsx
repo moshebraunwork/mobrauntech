@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Sparkles, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 const nav = [
   { href: "/", label: "Home" },
@@ -18,10 +18,21 @@ export function Footer() {
       <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <Link href="/" className="flex w-fit items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent via-accent-2 to-accent-3 text-white">
-                <Sparkles size={16} strokeWidth={2.5} />
-              </span>
+            <Link href="/" className="flex w-fit items-center gap-2.5">
+              <span
+                aria-hidden
+                className="h-7 w-14 bg-foreground"
+                style={{
+                  maskImage: "url(/logo-mark.png)",
+                  WebkitMaskImage: "url(/logo-mark.png)",
+                  maskRepeat: "no-repeat",
+                  WebkitMaskRepeat: "no-repeat",
+                  maskSize: "contain",
+                  WebkitMaskSize: "contain",
+                  maskPosition: "center",
+                  WebkitMaskPosition: "center",
+                }}
+              />
               <span className="font-display text-lg font-bold tracking-tight">
                 Mobrauntech
               </span>
