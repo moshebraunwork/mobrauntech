@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { SpotlightCard } from "@/components/spotlight-card";
+import { BuildAlong } from "@/components/build-along";
 import {
   ArrowRight,
   CheckCircle2,
@@ -361,6 +362,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Scroll-driven "watch it build itself" demo */}
+      <BuildAlong />
 
       {/* Pricing preview */}
       <section className="border-y border-border bg-surface/40">
