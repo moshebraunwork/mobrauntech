@@ -1,3 +1,5 @@
+import projectsToShowOff from "../../projectsToShowOff.json";
+
 export type Project = {
   id: string;
   title: string;
@@ -8,32 +10,32 @@ export type Project = {
   category: "website" | "app" | "ecommerce" | "other";
 };
 
-// Add your projects here. Each project will appear as a card on the Projects page.
-export const projects: Project[] = [
-  {
-    id: "1",
-    title: "Sample Business Website",
-    description:
-      "A clean, modern marketing website built for a local service business. Features a responsive design, contact form, and Google Maps integration.",
-    tags: ["Next.js", "Tailwind CSS", "TypeScript"],
-    category: "website",
-    // imageUrl: "/projects/sample.png",  // Add a screenshot to /public/projects/
-    // liveUrl: "https://example.com",
-  },
-  {
-    id: "2",
-    title: "E-commerce Store",
-    description:
-      "A full-featured online store with product catalog, shopping cart, and Stripe payment integration for a retail client.",
-    tags: ["Next.js", "Stripe", "PostgreSQL"],
-    category: "ecommerce",
-  },
-  {
-    id: "3",
-    title: "Custom Booking App",
-    description:
-      "A custom scheduling and appointment management application for a service-based small business.",
-    tags: ["React", "Node.js", "PostgreSQL"],
-    category: "app",
-  },
+const CATEGORIES: Project["category"][] = [
+  "website",
+  "app",
+  "ecommerce",
+  "other",
 ];
+
+/**
+ * Projects are loaded from `projectsToShowOff.json` at the repository root.
+ * Edit that file to add, remove, or update the projects shown on the site —
+ * no code changes needed. Each entry becomes a card on the Projects page.
+ *
+ * Optional fields:
+ *  - `imageUrl`: path to a screenshot in /public (e.g. "/projects/site.png").
+ *    Leave empty ("") to show a styled placeholder instead.
+ *  - `liveUrl`: link to the live site. Leave empty ("") to hide the button.
+ */
+export const projects: Project[] = (
+  projectsToShowOff as Array<Omit<Project, "category"> & { category: string }>
+).map((project) => ({
+  ...project,
+  // Fall back to "other" if the category isn't one we recognize.
+  category: CATEGORIES.includes(project.category as Project["category"])
+    ? (project.category as Project["category"])
+    : "other",
+  // Treat empty strings as "not set" so placeholders/links behave correctly.
+  imageUrl: project.imageUrl || undefined,
+  liveUrl: project.liveUrl || undefined,
+}));

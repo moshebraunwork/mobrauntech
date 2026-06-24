@@ -154,9 +154,9 @@ export default function Home() {
     <BuildExperience>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        {/* Background layers */}
+        {/* Background layers (the grid itself is rendered full-width by
+            BuildExperience so it spans behind both columns) */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="bg-grid absolute inset-0" />
           <div className="animate-aurora absolute -top-40 left-1/4 h-130 w-130 rounded-full bg-foreground/[0.06] blur-[120px]" />
           <div className="animate-float absolute top-20 -right-20 h-105 w-105 rounded-full bg-foreground/[0.04] blur-[110px]" />
           <div className="animate-float-slow absolute -bottom-32 -left-24 h-95 w-95 rounded-full bg-foreground/[0.03] blur-[100px]" />

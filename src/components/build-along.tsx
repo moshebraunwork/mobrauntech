@@ -84,9 +84,16 @@ export function BuildExperience({ children }: { children: ReactNode }) {
     revealed ? "real" : phase >= appearsAt ? "skeleton" : "hidden";
 
   return (
-    <div ref={wrapRef} className="lg:flex">
+    <div ref={wrapRef} className="relative lg:flex">
+      {/* Full-width grid backdrop — spans behind both columns so the grid
+          texture reads across the entire hero, not just the right side. */}
+      <div
+        aria-hidden
+        className="bg-grid pointer-events-none absolute inset-x-0 top-0 h-[44rem] sm:h-[52rem]"
+      />
+
       {/* Pinned stage — hidden on small screens where side-by-side won't fit */}
-      <aside className="hidden lg:block lg:w-[42%] lg:shrink-0">
+      <aside className="relative hidden lg:block lg:w-[42%] lg:shrink-0">
         <div className="sticky top-16 flex h-[calc(100vh-4rem)] items-center px-5 xl:px-10">
           {/* Ambient glow behind the browser */}
           <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -104,7 +111,7 @@ export function BuildExperience({ children }: { children: ReactNode }) {
       </aside>
 
       {/* The real marketing content scrolls past on the right */}
-      <div className="min-w-0 lg:w-[58%]">{children}</div>
+      <div className="relative min-w-0 lg:w-[58%]">{children}</div>
     </div>
   );
 }

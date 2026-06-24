@@ -1,0 +1,11 @@
+[
+  {
+    "id": "1",
+    "title": "Sample Business Website",
+    "description": "A clean, modern marketing website built for a local service business. Features a responsive design, contact form, and Google Maps integration.",
+    "tags": ["Next.js", "Tailwind CSS", "TypeScript"],
+    "category": "website",
+    "imageUrl": "",
+    "liveUrl": ""
+  }
+]
